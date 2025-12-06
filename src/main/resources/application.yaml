@@ -1,3 +1,25 @@
 spring:
   application:
     name: lovable-clone
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+    show-sql: true
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+      javax:
+        persistence:
+          validation:
+            mode: none
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lovable?useSSL=false
+    username: postgres
+    password: "5487"
+
+server:
+  port: 8080
