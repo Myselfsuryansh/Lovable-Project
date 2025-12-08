@@ -2,6 +2,8 @@ package com.codingshuttle.projects.lovable_clone.entity;
 
 import java.time.Instant;
 
+import com.codingshuttle.projects.lovable_clone.enums.StatusSubscription;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,24 +14,29 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class Subscription {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long Id;
+    Long id;
+    
+    User user;
 
-    String email;
-    String passwordHash;
-    String name;
+    Plan plan;
 
-    String avatarUrl;
+    StatusSubscription statusSubscription;
+
+    String stripeCustomerId;
+    String stripeSubscriptionId;
+
+    Instant currentPeriodStart;
+    Instant currentPeriodEnd;
+    Boolean cancelAtPeriodEnd =false;
 
     Instant createdAt;
-
     Instant updatedAt;
-
-    Instant deletedAt; //soft delete
 
 }

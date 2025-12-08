@@ -12,24 +12,24 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class ProjectFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
 
-    String email;
-    String passwordHash;
-    String name;
+    Project project;
+    String path;
 
-    String avatarUrl;
+    String minioObjectKey;
 
     Instant createdAt;
 
     Instant updatedAt;
 
-    Instant deletedAt; //soft delete
+    User createdBy;
 
+    User updatedBy;
 }

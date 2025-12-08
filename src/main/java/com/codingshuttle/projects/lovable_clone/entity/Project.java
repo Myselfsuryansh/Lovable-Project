@@ -12,24 +12,23 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class Project {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long Id;
+    Long id;
 
-    String email;
-    String passwordHash;
     String name;
+    User owner;
 
+    Boolean isPublic = false;
     String avatarUrl;
 
     Instant createdAt;
 
     Instant updatedAt;
-
-    Instant deletedAt; //soft delete
 
 }
