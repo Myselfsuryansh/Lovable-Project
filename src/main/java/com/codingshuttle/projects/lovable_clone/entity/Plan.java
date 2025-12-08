@@ -1,7 +1,5 @@
 package com.codingshuttle.projects.lovable_clone.entity;
 
-import java.time.Instant;
-
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,21 +13,18 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class Plan {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long Id;
+    Long id;
 
-    String email;
-    String passwordHash;
     String name;
+    Integer maxProjects;
+    Integer maxTokensPerDay;
+    Integer maxPreviews;
+    Boolean unlimitedAi;
 
-    String avatarUrl;
-
-    Instant createdAt;
-
-    Instant updatedAt;
-
-    Instant deletedAt; //soft delete
+    Boolean active;
 
 }
