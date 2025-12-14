@@ -1,15 +1,36 @@
 package com.codingshuttle.projects.lovable_clone.service;
 
+import org.springframework.stereotype.Service;
+
 import com.codingshuttle.projects.lovable_clone.dto.subscription.CheckoutRequest;
 import com.codingshuttle.projects.lovable_clone.dto.subscription.CheckoutResponse;
 import com.codingshuttle.projects.lovable_clone.dto.subscription.PortalResponse;
 import com.codingshuttle.projects.lovable_clone.dto.subscription.SubscriptionResponse;
+import com.codingshuttle.projects.lovable_clone.interfaceService.ISubscriptionService;
 
-public interface SubscriptionService {
-    SubscriptionResponse getCurrentSubscription(Long userId);
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class SubscriptionService implements ISubscriptionService {
 
-    CheckoutResponse createCheckoutSessionUrl(CheckoutRequest request, Long userId);
+    @Override
+    public SubscriptionResponse getCurrentSubscription(Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCurrentSubscription'");
+    }
 
-    PortalResponse openCustomerPortal(Long userId);
+    @Override
+    public CheckoutResponse createCheckoutSessionUrl(CheckoutRequest request, Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createCheckoutSessionUrl'");
+    }
+
+    @Override
+    public PortalResponse openCustomerPortal(Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'openCustomerPortal'");
+    }
 
 }

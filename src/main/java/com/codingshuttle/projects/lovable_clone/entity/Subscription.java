@@ -2,8 +2,7 @@ package com.codingshuttle.projects.lovable_clone.entity;
 
 import java.time.Instant;
 
-import com.codingshuttle.projects.lovable_clone.enums.StatusSubscription;
-
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,11 +23,11 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     
-    User user;
+    // User user;
 
-    Plan plan;
+    // Plan plan;
 
-    StatusSubscription statusSubscription;
+    // StatusSubscription statusSubscription;
 
     String stripeCustomerId;
     String stripeSubscriptionId;

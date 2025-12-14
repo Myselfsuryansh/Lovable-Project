@@ -13,16 +13,19 @@ import com.codingshuttle.projects.lovable_clone.dto.subscription.CheckoutRespons
 import com.codingshuttle.projects.lovable_clone.dto.subscription.PlanResponse;
 import com.codingshuttle.projects.lovable_clone.dto.subscription.PortalResponse;
 import com.codingshuttle.projects.lovable_clone.dto.subscription.SubscriptionResponse;
-import com.codingshuttle.projects.lovable_clone.service.PlanService;
-import com.codingshuttle.projects.lovable_clone.service.SubscriptionService;
+import com.codingshuttle.projects.lovable_clone.interfaceService.IPlanService;
+import com.codingshuttle.projects.lovable_clone.interfaceService.ISubscriptionService;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @RestController
 @RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class BillingController {
-    private final PlanService planService;
-    private final SubscriptionService subscriptionService;
+     IPlanService planService;
+     ISubscriptionService subscriptionService;
 
     @GetMapping("/api/plans")
     public ResponseEntity<List<PlanResponse>> getAllPlans() {
