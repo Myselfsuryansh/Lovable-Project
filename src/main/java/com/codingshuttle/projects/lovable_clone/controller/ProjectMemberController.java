@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codingshuttle.projects.lovable_clone.dto.member.InviteMemberRequest;
 import com.codingshuttle.projects.lovable_clone.dto.member.MemberResponse;
-import com.codingshuttle.projects.lovable_clone.service.ProjectMemberService;
+import com.codingshuttle.projects.lovable_clone.dto.member.UpdateMemberRoleRequest;
+import com.codingshuttle.projects.lovable_clone.interfaceService.IProjectMemberService;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @RestController
 @RequestMapping("api/projects/{projectId}/members")
 @RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ProjectMemberController {
-    private final ProjectMemberService projectMemberService;
+    IProjectMemberService projectMemberService;
 
     @GetMapping
     public ResponseEntity<List<MemberResponse>> getProjectMember(@PathVariable Long projectId) {
@@ -41,7 +45,7 @@ public class ProjectMemberController {
 
     @PatchMapping("/{memberId}")
     public ResponseEntity<MemberResponse> updateMemberRole(@PathVariable Long projectId, @PathVariable Long memberId,
-            @RequestBody InviteMemberRequest request)
+            @RequestBody UpdateMemberRoleRequest request)
 
     {
         Long userId = 1L;

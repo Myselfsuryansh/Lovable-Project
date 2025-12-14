@@ -2,6 +2,7 @@ package com.codingshuttle.projects.lovable_clone.entity;
 
 import java.time.Instant;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +22,7 @@ public class ProjectFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Id;
 
-    Project project;
+    // Project project;
     String path;
 
     String minioObjectKey;
@@ -29,7 +31,7 @@ public class ProjectFile {
 
     Instant updatedAt;
 
-    User createdBy;
+    // User createdBy;
 
-    User updatedBy;
+    // User updatedBy;
 }

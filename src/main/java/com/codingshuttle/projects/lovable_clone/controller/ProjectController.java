@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codingshuttle.projects.lovable_clone.dto.project.ProjectRequest;
 import com.codingshuttle.projects.lovable_clone.dto.project.ProjectResponse;
 import com.codingshuttle.projects.lovable_clone.dto.project.ProjectSummaryResponse;
-import com.codingshuttle.projects.lovable_clone.service.ProjectService;
+import com.codingshuttle.projects.lovable_clone.interfaceService.IProjectService;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @RestController
 @RequestMapping("api/projects")
 @RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ProjectController {
 
-    private final ProjectService projectService;
+    IProjectService projectService;
 
     @GetMapping
     public ResponseEntity<List<ProjectSummaryResponse>> GetMyProject() {

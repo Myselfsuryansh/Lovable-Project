@@ -2,17 +2,45 @@ package com.codingshuttle.projects.lovable_clone.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.codingshuttle.projects.lovable_clone.dto.member.InviteMemberRequest;
 import com.codingshuttle.projects.lovable_clone.dto.member.MemberResponse;
+import com.codingshuttle.projects.lovable_clone.dto.member.UpdateMemberRoleRequest;
+import com.codingshuttle.projects.lovable_clone.interfaceService.IProjectMemberService;
 
-public interface ProjectMemberService {
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class ProjectMemberService implements IProjectMemberService{
 
-    List<MemberResponse> getProjectMembers(Long projectId, Long userId);
+    @Override
+    public List<MemberResponse> getProjectMembers(Long projectId, Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getProjectMembers'");
+    }
 
-    MemberResponse inviteMember(Long projectId, InviteMemberRequest request, Long userId);
+    @Override
+    public MemberResponse inviteMember(Long projectId, InviteMemberRequest request, Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'inviteMember'");
+    }
 
-    MemberResponse updateMemberRole(Long projectId, Long memberId, InviteMemberRequest request, Long userId);
+ 
 
-    MemberResponse deleteMemberRole(Long projectId, Long memberId, Long userId);
+    @Override
+    public MemberResponse deleteMemberRole(Long projectId, Long memberId, Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteMemberRole'");
+    }
+
+    @Override
+    public MemberResponse updateMemberRole(Long projectId, Long memberId, UpdateMemberRoleRequest request,
+            Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateMemberRole'");
+    }
 
 }

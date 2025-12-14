@@ -10,16 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codingshuttle.projects.lovable_clone.dto.project.FileContentResponse;
 import com.codingshuttle.projects.lovable_clone.dto.project.FileNode;
-import com.codingshuttle.projects.lovable_clone.service.FileService;
+import com.codingshuttle.projects.lovable_clone.interfaceService.IFileService;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @RestController
 @RequestMapping("api/projects/{projectId}/files")
 @RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class FileController {
 
-    private final FileService fileService;
+   IFileService fileService;
 
     @GetMapping
     public ResponseEntity<List<FileNode>> getFileTree(@PathVariable Long projectId) {
