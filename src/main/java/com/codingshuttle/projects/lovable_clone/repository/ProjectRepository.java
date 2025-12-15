@@ -1,6 +1,7 @@
 package com.codingshuttle.projects.lovable_clone.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,5 +20,14 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     """)
 
     List<Project> findAllAccessibleByUser(@Param("userId") Long userId);
+
+    @Query("""
+            SELECT p from Project p
+            LEFT JOIN FETCH p.owner
+            where p.id = :projectId
+                AND p.deletedAt is NULL
+                AND p.owner.id = :userId
+            """)
+    Optional<Project> findAccessibleProjectById(@Param("projectId") Long projectId, @Param("userId") Long userId);
 
 }
