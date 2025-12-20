@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -26,7 +27,13 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "projects")
+@Table(name = "projects",
+    indexes = {
+        @Index(name="idx_projects_updated_at_desc",columnList = "updated_at_DESC,deletedAt"),
+        @Index(name="idx_projects_deleted_at_updated_at_desc",columnList = "deleted_at, updated_at_DESC"),
+        @Index(name="idx_projects_deleted_at",columnList = "deleted_at")
+    }
+)
 public class Project {
 
     @Id
