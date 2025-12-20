@@ -18,6 +18,7 @@ import com.codingshuttle.projects.lovable_clone.dto.member.MemberResponse;
 import com.codingshuttle.projects.lovable_clone.dto.member.UpdateMemberRoleRequest;
 import com.codingshuttle.projects.lovable_clone.interfaceService.IProjectMemberService;
 
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -37,7 +38,7 @@ public class ProjectMemberController {
 
     @PostMapping
     public ResponseEntity<MemberResponse> inviteMember(@PathVariable Long projectId,
-            @RequestBody InviteMemberRequest request) {
+            @RequestBody @Valid InviteMemberRequest request) {
         Long userId = 1L;
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(projectMemberService.inviteMember(projectId, request, userId));
@@ -45,7 +46,7 @@ public class ProjectMemberController {
 
     @PatchMapping("/{memberId}")
     public ResponseEntity<MemberResponse> updateMemberRole(@PathVariable Long projectId, @PathVariable Long memberId,
-            @RequestBody UpdateMemberRoleRequest request)
+            @RequestBody   @Valid UpdateMemberRoleRequest request)
 
     {
         Long userId = 1L;

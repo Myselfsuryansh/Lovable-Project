@@ -41,7 +41,6 @@ public class ProjectMemberService implements IProjectMemberService {
     public List<MemberResponse> getProjectMembers(Long projectId, Long userId) {
         Project project = getAccessibleByProjectId(projectId, userId);
         List<MemberResponse> memberResponseList = new ArrayList<>();
-        memberResponseList.add(projectMemberMapper.toProjectMemberResponseFromOwner(project.getOwner()));
         memberResponseList.addAll(
                 projectMemberRepository.findByIdProjectId(projectId)
                         .stream()
@@ -54,10 +53,6 @@ public class ProjectMemberService implements IProjectMemberService {
     @Override
     public MemberResponse inviteMember(Long projectId, InviteMemberRequest request, Long userId) {
         Project project = getAccessibleByProjectId(projectId, userId);
-
-        if (!project.getOwner().getId().equals(userId)) {
-            throw new RuntimeException("Not Allowed");
-        }
 
         User invitee = userRepository.findByEmail(request.email()).orElseThrow();
 
