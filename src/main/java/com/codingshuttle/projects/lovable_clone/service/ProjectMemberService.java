@@ -18,6 +18,7 @@ import com.codingshuttle.projects.lovable_clone.mapper.ProjectMemberMapper;
 import com.codingshuttle.projects.lovable_clone.repository.ProjectMemberRepository;
 import com.codingshuttle.projects.lovable_clone.repository.ProjectRepository;
 import com.codingshuttle.projects.lovable_clone.repository.UserRepository;
+import com.codingshuttle.projects.lovable_clone.security.AuthUtil;
 
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
@@ -36,9 +37,11 @@ public class ProjectMemberService implements IProjectMemberService {
     UserRepository userRepository;
     ProjectRepository projectRepository;
     ProjectMemberMapper projectMemberMapper;
+    AuthUtil authUtil;
 
     @Override
-    public List<MemberResponse> getProjectMembers(Long projectId, Long userId) {
+    public List<MemberResponse> getProjectMembers(Long projectId) {
+        Long userId = authUtil.getCurrentUserId();
         Project project = getAccessibleByProjectId(projectId, userId);
         List<MemberResponse> memberResponseList = new ArrayList<>();
         memberResponseList.addAll(
@@ -51,7 +54,8 @@ public class ProjectMemberService implements IProjectMemberService {
     }
 
     @Override
-    public MemberResponse inviteMember(Long projectId, InviteMemberRequest request, Long userId) {
+    public MemberResponse inviteMember(Long projectId, InviteMemberRequest request) {
+        Long userId = authUtil.getCurrentUserId();
         Project project = getAccessibleByProjectId(projectId, userId);
 
         User invitee = userRepository.findByEmail(request.email()).orElseThrow();
@@ -78,7 +82,8 @@ public class ProjectMemberService implements IProjectMemberService {
     }
 
     @Override
-    public Void removeProjectMember(Long projectId, Long memberId, Long userId) {
+    public Void removeProjectMember(Long projectId, Long memberId) {
+        Long userId = authUtil.getCurrentUserId();
         Project project = getAccessibleByProjectId(projectId, userId);
 
         if (!project.getOwner().getId().equals(userId)) {
@@ -93,8 +98,7 @@ public class ProjectMemberService implements IProjectMemberService {
     }
 
     @Override
-    public MemberResponse updateMemberRole(Long projectId, Long memberId, UpdateMemberRoleRequest request,
-            Long userId) {
+    public MemberResponse updateMemberRole(Long projectId, Long memberId, UpdateMemberRoleRequest request) {
         ProjectMemberId projectMemberId = new ProjectMemberId(projectId, memberId);
         ProjectMember projectMember = projectMemberRepository.findById(projectMemberId).orElseThrow();
 
