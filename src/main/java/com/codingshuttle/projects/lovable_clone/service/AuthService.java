@@ -1,5 +1,8 @@
 package com.codingshuttle.projects.lovable_clone.service;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,7 @@ import com.codingshuttle.projects.lovable_clone.exception.ResourceNotFoundExcept
 import com.codingshuttle.projects.lovable_clone.interfaceService.IAuthService;
 import com.codingshuttle.projects.lovable_clone.mapper.UserMapper;
 import com.codingshuttle.projects.lovable_clone.repository.UserRepository;
+import com.codingshuttle.projects.lovable_clone.security.AuthUtil;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +30,8 @@ public class AuthService implements IAuthService {
     UserRepository userRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
+    AuthUtil authUtil;
+    AuthenticationManager authenticationManager;
 
     @Override
     public AuthResponse signup(SignUpRequest request) {
@@ -35,13 +41,18 @@ public class AuthService implements IAuthService {
         User user = userMapper.toEntity(request);
         user.setPasswordHash(passwordEncoder.encode(request.password()));
         user = userRepository.save(user);
-        return new AuthResponse("dummy", userMapper.toUserProfileResponse(user));
+        String token = authUtil.generateAccessToken(user);
+        return new AuthResponse(token, userMapper.toUserProfileResponse(user));
     }
 
     @Override
     public AuthResponse login(LoginRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+        User user = (User) authentication.getPrincipal();
+
+        String token = authUtil.generateAccessToken(user);
+        return new AuthResponse(token, userMapper.toUserProfileResponse(user));
     }
 
 }
