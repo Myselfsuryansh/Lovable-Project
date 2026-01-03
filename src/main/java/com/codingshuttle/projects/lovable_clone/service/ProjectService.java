@@ -61,11 +61,6 @@ public class ProjectService implements IProjectService {
 
     @Override
     public List<ProjectSummaryResponse> getUserProjects(Long userId) {
-        // return projectRepository.findAllAccessibleByUser(userId)
-        // .stream()
-        // .map(project -> projectMapper.toProjectSummaryResponse(project))
-        // .collect(Collectors.toList());
-
         var project = projectRepository.findAllAccessibleByUser(userId);
         return projectMapper.toListOfProjectSummaryResponse(project);
     }
@@ -87,9 +82,6 @@ public class ProjectService implements IProjectService {
     @Override
     public void softDelete(Long id, Long userId) {
         Project project = getAccessibleByProjectId(id, userId);
-        if (!project.getOwner().getId().equals(userId)) {
-            throw new RuntimeException("You are not an owner,You can't delete");
-        }
         project.setDeletedAt(Instant.now());
         projectRepository.delete(project);
 
