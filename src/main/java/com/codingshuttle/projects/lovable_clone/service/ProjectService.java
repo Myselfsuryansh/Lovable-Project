@@ -43,8 +43,9 @@ public class ProjectService implements IProjectService {
     @Override
     public ProjectResponse createProject(ProjectRequest request) {
         Long userId = authUtil.getCurrentUserId();
-        User owner = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        // User owner = userRepository.findById(userId) -> This code will make DB call
+        //         .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        User owner= userRepository.getReferenceById(userId); //-> This code will not make a DB call(It need @Transactional)
 
         Project project = Project.builder().name(request.name()).isPublic(false).owner(owner).build();
         project = projectRepository.save(project);
@@ -90,7 +91,7 @@ public class ProjectService implements IProjectService {
         Long userId = authUtil.getCurrentUserId();
         Project project = getAccessibleByProjectId(id, userId);
         project.setDeletedAt(Instant.now());
-        projectRepository.delete(project);
+        projectRepository.save(project);
 
     }
 
