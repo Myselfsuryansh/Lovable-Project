@@ -20,6 +20,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/lovable?useSSL=false
     username: postgres
     password: "5487"
-
+jwt:
+  secret-key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
 server:
   port: 8080
