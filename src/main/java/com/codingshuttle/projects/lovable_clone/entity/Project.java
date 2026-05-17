@@ -29,8 +29,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "projects",
     indexes = {
-        @Index(name="idx_projects_updated_at_desc",columnList = "updated_at_DESC,deletedAt"),
-        @Index(name="idx_projects_deleted_at_updated_at_desc",columnList = "deleted_at, updated_at_DESC"),
+        @Index(name="idx_projects_updated_at",columnList = "updated_at,deletedAt"),
+        @Index(name="idx_projects_deleted_at_updated_at",columnList = "deleted_at, updated_at"),
         @Index(name="idx_projects_deleted_at",columnList = "deleted_at")
     }
 )
