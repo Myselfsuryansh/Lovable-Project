@@ -3,6 +3,7 @@ package com.codingshuttle.projects.lovable_clone.service;
 import java.time.Instant;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.codingshuttle.projects.lovable_clone.dto.project.ProjectRequest;
@@ -71,9 +72,10 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public ProjectResponse getUserProjectById(Long id) {
+    @PreAuthorize("@security.canViewProjects(#projectId)")
+    public ProjectResponse getUserProjectById(Long projectId) {
         Long userId = authUtil.getCurrentUserId();
-        Project project = getAccessibleByProjectId(id, userId);
+        Project project = getAccessibleByProjectId(projectId, userId);
         return projectMapper.toProjectResponse(project);
     }
 
